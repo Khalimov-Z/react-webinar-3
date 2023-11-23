@@ -5,6 +5,7 @@ class Store {
   constructor(initState = {}) {
     this.state = initState;
     this.listeners = []; // Слушатели изменений состояния
+    this.codeCounter = initState.list ? initState.list.length + 1 : 1; // Инициализация счетчика кодов
   }
 
   /**
@@ -42,12 +43,15 @@ class Store {
    * Добавление новой записи
    */
   addItem() {
+    const newItem = { code: this.codeCounter, title: 'Новая запись' };
+
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: this.state.list.length + 1, title: 'Новая запись'}]
-    })
-  };
+      list: [...this.state.list, newItem]
+    });
 
+    this.codeCounter++;
+  }
   /**
    * Удаление записи по коду
    * @param code
@@ -67,8 +71,11 @@ class Store {
     this.setState({
       ...this.state,
       list: this.state.list.map(item => {
-        if (item.code === code) {
+        if (item.code === code || item.selected  ) {
           item.selected = !item.selected;
+         if(item.selected){
+           item.selectedCount = (item.selectedCount || 0) + 1;
+         }
         }
         return item;
       })
