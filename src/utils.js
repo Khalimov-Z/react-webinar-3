@@ -1,28 +1,18 @@
-const propNames = new Set(['id', 'className', 'textContent', 'onclick']);
-
 /**
- * Создание элемента со свойствами и вложенными элементами
- * @param name {String} Название HTML тега
- * @param props {Object} Свойства и атрибуты элемента
- * @param children {...Node} Вложенные элементы
- * @returns {HTMLElement}
+ * Получение формы слова во множественном числе в зависимости от числового значения
+ * @param count {Number} Числовое значение для определения формы слова
+ * @returns {String} Форма слова во множественном числе
  */
-export function createElement(name, props = {}, ...children) {
-  const element = document.createElement(name);
+export function getPluralForm(count) {
+  const pluralRules = new Intl.PluralRules('ru-RU');
 
-  // Назначение свойств и атрибутов
-  for (const name of Object.keys(props)) {
-    if (propNames.has(name)) {
-      element[name] = props[name];
-    } else {
-      element.setAttribute(name, props[name]);
-    }
-  }
+  const forms = {
+    one: 'раз',
+    few: 'раза',
+    many: 'раз',
+  };
 
-  // Вставка вложенных элементов
-  for (const child of children) {
-    element.append(child);
-  }
+  const pluralCategory = pluralRules.select(count);
 
-  return element;
+  return forms[pluralCategory];
 }

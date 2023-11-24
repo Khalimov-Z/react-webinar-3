@@ -1,5 +1,5 @@
 import React from 'react';
-import {createElement} from './utils.js';
+import {getPluralForm} from './utils.js';
 import './styles.css';
 
 /**
@@ -28,7 +28,7 @@ function App({store}) {
                 <div className='Item-code'>{item.code}</div>
                 <div className='Item-title'>
                     {item.title}
-                    {item.selectedCount && ` Выделяли ${item.selectedCount} раз`}
+                    {item.selectedCount && ` |  Выделяли ${item.selectedCount} ${getPluralForm(item.selectedCount)}`}
                 </div>
                 <div className='Item-actions'>
                   <button onClick={() => store.deleteItem(item.code)}>
