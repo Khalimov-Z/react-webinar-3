@@ -1,14 +1,15 @@
-.Item {
+.CartItem {
   display: flex;
   justify-content: flex-start;
   transition: background-color 1s;
+  border-top: 1px dashed #ccc;
 }
 
-.Item-code {
+.CartItem-code {
   padding: 20px 10px 20px 20px;
 }
 
-.Item-title {
+.CartItem-title {
   width: 100%;
   padding: 20px 10px;
   color: #000;
@@ -18,14 +19,31 @@
   line-height: normal;
 }
 
-.Item-actions {
+.CartItem-actions {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 20px 20px 10px;
 }
 
-.Item-price {
+.CartItem-price {
+  display: flex;
+  align-items: center;
+  margin-right: 62px;
+  color: #404040;
+  text-align: right;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.CartItem-price::after {
+  content: ' ₽';
+  margin-left: 5px;
+}
+
+.CartItem-quantity {
   display: flex;
   align-items: center;
   margin-right: 24px;
@@ -37,12 +55,13 @@
   line-height: normal;
 }
 
-.Item-price::after {
-  content: ' ₽';
+.CartItem-quantity::after {
+  content: ' шт';
   margin-left: 5px;
 }
 
-.Item-btn {
+.CartItem-removeBtn {
   width: 76px;
   height: 22px;
+  cursor: pointer;
 }

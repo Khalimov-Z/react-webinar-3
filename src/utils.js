@@ -50,3 +50,21 @@ export const generateCode1 = (function (start = 0) {
 export function generateCode2() {
   return generateCode2.value ? ++generateCode2.value : generateCode2.value = 1;
 }
+
+export function calculateTotalSum(cartItems) {
+  return cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+}
+
+export function getPluralForm(count) {
+  const pluralRules = new Intl.PluralRules('ru-RU');
+
+  const forms = {
+    one: 'товар',
+    few: 'товара',
+    many: 'товаров',
+  };
+
+  const pluralCategory = pluralRules.select(count);
+
+  return forms[pluralCategory];
+}
