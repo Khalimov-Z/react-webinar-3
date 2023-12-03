@@ -5,7 +5,7 @@ import './style.css'
 import {cn as bem} from "@bem-react/classname";
 import PropTypes from "prop-types";
 
-function CartModal({ cartItems, onCloseCart, onRemoveFromCart }) {
+function CartModal({ cart, onCloseCart, onRemoveFromCart }) {
   const cn = bem('CartModal');
 
   return (
@@ -18,7 +18,7 @@ function CartModal({ cartItems, onCloseCart, onRemoveFromCart }) {
           </button>
         </div>
         <div className={cn('items')}>
-          {cartItems.map((cartItem) => (
+          {cart.map((cartItem) => (
             <CartItem key={cartItem.code} cartItem={cartItem} onRemoveFromCart={onRemoveFromCart} />
           ))}
         </div>
@@ -26,7 +26,7 @@ function CartModal({ cartItems, onCloseCart, onRemoveFromCart }) {
           <span>
             Итого
           </span>
-          <p>{calculateTotalSum(cartItems)}</p>
+          <p>{calculateTotalSum(cart)}</p>
         </div>
       </div>
     </div>
@@ -34,13 +34,13 @@ function CartModal({ cartItems, onCloseCart, onRemoveFromCart }) {
 }
 
 CartModal.propTypes = {
-  cartItems: PropTypes.array.isRequired,
+  cart: PropTypes.array.isRequired,
   onCloseCart: PropTypes.func.isRequired,
   onRemoveFromCart: PropTypes.func.isRequired,
 };
 
 CartModal.defaultProps = {
-  cartItems: [],
+  cart: [],
   onCloseCart: () => {},
   onRemoveFromCart: () => {},
 };

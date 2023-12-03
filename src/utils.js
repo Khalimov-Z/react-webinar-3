@@ -52,12 +52,31 @@ export function generateCode2() {
 }
 
 /**
+ * Функция форматирования цены.
+ * @param {number} price - Цена, которую необходимо отформатировать.
+ * @returns {string} Отформатированная цена в формате строки с валютой.
+ */
+export function formatPrice(price) {
+  const formatter = new Intl.NumberFormat('ru-RU', {
+    style: 'currency',
+    currency: 'RUB',
+  });
+
+  return formatter.format(price);
+}
+
+/**
  * Рассчитывает общую сумму товаров в корзине
  * @param {Array} cartItems - Массив объектов товаров в корзине
- * @returns {Number} - Общая сумма товаров
+ * @returns {string} - Общая сумма товаров
  */
 export function calculateTotalSum(cartItems) {
-  return cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const totalSum = cartItems.reduce((sum, item) => {
+    const itemTotal = item.price * item.quantity;
+    return sum + itemTotal;
+  }, 0);
+
+  return formatPrice(totalSum);
 }
 
 /**
@@ -78,3 +97,4 @@ export function getPluralForm(count) {
 
   return forms[pluralCategory];
 }
+

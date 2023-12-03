@@ -13,47 +13,37 @@ import CartModal from "./components/cart-modal";
 function App({store}) {
 
   const list = store.getState().list;
-
-  const [cartItems, setCartItems] = React.useState([]);
-  const [isCartModalOpen, setIsCartModalOpen] = React.useState(false);
+  const cart = store.getState().cart;
+  const isCartModalOpen = store.getState().isCartModalOpen;
+  const cartCount = store.getCartCount()
 
   const callbacks = {
     handleAddToCart: useCallback((item) => {
-      const existingItem = cartItems.find((cartItem) => cartItem.code === item.code);
-
-      if (existingItem) {
-        setCartItems((prevItems) =>
-          prevItems.map((cartItem) =>
-            cartItem.code === item.code ? {...cartItem, quantity: cartItem.quantity + 1} : cartItem
-          )
-        );
-      } else {
-        setCartItems((prevItems) => [...prevItems, {...item, quantity: 1}]);
-      }
-    }, [cartItems, setCartItems]),
+      store.addToCart(item)
+    }, [store]),
 
     handleRemoveFromCart: useCallback((item) => {
-      setCartItems((prevItems) => prevItems.filter((cartItem) => cartItem.code !== item.code));
-    },[setCartItems]),
+      store.removeFromCart(item)
+    },[store]),
 
     handleOpenCart: useCallback(() => {
-      setIsCartModalOpen(true);
-    },[setIsCartModalOpen]),
+      store.openCartModal();
+    },[store]),
 
     handleCloseCart: useCallback(() => {
-      setIsCartModalOpen(false);
-    },[setIsCartModalOpen])
+      store.closeCartModal()
+    },[store])
 
   }
 
   return (
     <PageLayout>
       <Head title='Магазин' />
-      <Controls cartItems={cartItems} onOpenCart={callbacks.handleOpenCart} />
+      <Controls cartCount={cartCount} cart={cart} onOpenCart={callbacks.handleOpenCart} />
       <List list={list} onAddToCart={callbacks.handleAddToCart} />
       {isCartModalOpen && (
         <CartModal
-          cartItems={cartItems}
+          cart={cart}
           onCloseCart={callbacks.handleCloseCart}
           onRemoveFromCart={callbacks.handleRemoveFromCart}
         />
