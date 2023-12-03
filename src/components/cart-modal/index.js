@@ -13,7 +13,6 @@ function CartModal({ cartItems, onCloseCart, onRemoveFromCart }) {
             Закрыть
           </button>
         </div>
-
         <div className='CartModal-items'>
           {cartItems.map((cartItem) => (
             <CartItem key={cartItem.code} cartItem={cartItem} onRemoveFromCart={onRemoveFromCart} />

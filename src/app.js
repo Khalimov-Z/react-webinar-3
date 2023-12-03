@@ -18,7 +18,17 @@ function App({store}) {
   const [isCartModalOpen, setIsCartModalOpen] = React.useState(false);
 
   const handleAddToCart = (item) => {
-    setCartItems((prevItems) => [...prevItems, { ...item, quantity: 1 }]);
+    const existingItem = cartItems.find((cartItem) => cartItem.code === item.code);
+
+    if (existingItem) {
+      setCartItems((prevItems) =>
+        prevItems.map((cartItem) =>
+          cartItem.code === item.code ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
+        )
+      );
+    } else {
+      setCartItems((prevItems) => [...prevItems, { ...item, quantity: 1 }]);
+    }
   };
 
   const handleRemoveFromCart = (item) => {

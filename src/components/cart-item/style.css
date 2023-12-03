@@ -36,10 +36,11 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  justify-content: end;
 }
 
 .CartItem-price::after {
-  content: ' ₽';
+  content: '₽';
   margin-left: 5px;
 }
 
@@ -56,12 +57,15 @@
 }
 
 .CartItem-quantity::after {
-  content: ' шт';
-  margin-left: 5px;
+  content: 'шт';
+  margin-left: 6px;
 }
 
 .CartItem-removeBtn {
   width: 76px;
   height: 22px;
+  border-radius: 2px;
+  border: 1px solid #767676;
+  background: #EFEFEF;
   cursor: pointer;
 }
