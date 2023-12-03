@@ -1,18 +1,21 @@
 import React from "react";
 import './style.css';
+import {cn as bem} from "@bem-react/classname";
+import PropTypes from "prop-types";
 
-function Item({ item, onAddToCart }) {
+function Item(props) {
+  const cn = bem('Item');
   const handleAddToCart = () => {
-    onAddToCart(item);
+    props.onAddToCart(props.item);
   };
 
   return (
-    <div className='Item'>
-      <div className='Item-code'>{item.code}</div>
-      <div className='Item-title'>{item.title}</div>
-      <div className='Item-actions'>
-        <div className='Item-price'>{item.price}</div>
-        <button className='Item-btn' onClick={handleAddToCart}>
+    <div className={cn()}>
+      <div className={cn('code')}>{props.item.code}</div>
+      <div className={cn('title')}>{props.item.title}</div>
+      <div className={cn('actions')}>
+        <div className={cn('price')}>{props.item.price}</div>
+        <button className={cn('btn')} onClick={handleAddToCart}>
           Добавить
         </button>
       </div>
@@ -20,6 +23,21 @@ function Item({ item, onAddToCart }) {
   );
 }
 
+Item.propTypes = {
+  item: PropTypes.shape({
+    code: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+  }).isRequired,
+  onAddToCart: PropTypes.func.isRequired,
+};
 
+Item.defaultProps = {
+  item: {
+    code: '',
+    title: '',
+    price: 0,
+  },
+};
 
 export default React.memo(Item);

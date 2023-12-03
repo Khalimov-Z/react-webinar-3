@@ -1,6 +1,7 @@
 import React from "react";
 import Item from "../item";
 import './style.css';
+import PropTypes from "prop-types";
 
 function List({ list, onAddToCart }) {
   return (
@@ -13,5 +14,14 @@ function List({ list, onAddToCart }) {
     </div>
   );
 }
+
+List.propTypes = {
+  list: PropTypes.arrayOf(
+    PropTypes.shape({
+      code: PropTypes.number.isRequired,
+    })
+  ).isRequired,
+  onAddToCart: PropTypes.func.isRequired,
+};
 
 export default React.memo(List);

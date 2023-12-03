@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import List from "./components/list";
 import Controls from "./components/controls";
 import Head from "./components/head";
@@ -17,38 +17,46 @@ function App({store}) {
   const [cartItems, setCartItems] = React.useState([]);
   const [isCartModalOpen, setIsCartModalOpen] = React.useState(false);
 
-  const handleAddToCart = (item) => {
-    const existingItem = cartItems.find((cartItem) => cartItem.code === item.code);
+  const callbacks = {
+    handleAddToCart: useCallback((item) => {
+      const existingItem = cartItems.find((cartItem) => cartItem.code === item.code);
 
-    if (existingItem) {
-      setCartItems((prevItems) =>
-        prevItems.map((cartItem) =>
-          cartItem.code === item.code ? { ...cartItem, quantity: cartItem.quantity + 1 } : cartItem
-        )
-      );
-    } else {
-      setCartItems((prevItems) => [...prevItems, { ...item, quantity: 1 }]);
-    }
-  };
+      if (existingItem) {
+        setCartItems((prevItems) =>
+          prevItems.map((cartItem) =>
+            cartItem.code === item.code ? {...cartItem, quantity: cartItem.quantity + 1} : cartItem
+          )
+        );
+      } else {
+        setCartItems((prevItems) => [...prevItems, {...item, quantity: 1}]);
+      }
+    }, [cartItems, setCartItems]),
 
-  const handleRemoveFromCart = (item) => {
-    setCartItems((prevItems) => prevItems.filter((cartItem) => cartItem.code !== item.code));
-  };
+    handleRemoveFromCart: useCallback((item) => {
+      setCartItems((prevItems) => prevItems.filter((cartItem) => cartItem.code !== item.code));
+    },[setCartItems]),
 
-  const handleOpenCart = () => {
-    setIsCartModalOpen(true);
-  };
+    handleOpenCart: useCallback(() => {
+      setIsCartModalOpen(true);
+    },[setIsCartModalOpen]),
 
-  const handleCloseCart = () => {
-    setIsCartModalOpen(false);
-  };
+    handleCloseCart: useCallback(() => {
+      setIsCartModalOpen(false);
+    },[setIsCartModalOpen])
+
+  }
+
   return (
     <PageLayout>
       <Head title='Магазин' />
-      <Controls cartItems={cartItems} onOpenCart={handleOpenCart} />
-      <List list={list} onAddToCart={handleAddToCart} />
+      <Controls cartItems={cartItems} onOpenCart={callbacks.handleOpenCart} />
+      <List list={list} onAddToCart={callbacks.handleAddToCart} />
       {isCartModalOpen && (
-        <CartModal cartItems={cartItems} onCloseCart={handleCloseCart} onRemoveFromCart={handleRemoveFromCart} />
+        <CartModal
+          cartItems={cartItems}
+          onCloseCart={callbacks.handleCloseCart}
+          onRemoveFromCart={callbacks.handleRemoveFromCart}
+        />
       )}
     </PageLayout>
   );

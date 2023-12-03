@@ -51,10 +51,20 @@ export function generateCode2() {
   return generateCode2.value ? ++generateCode2.value : generateCode2.value = 1;
 }
 
+/**
+ * Рассчитывает общую сумму товаров в корзине
+ * @param {Array} cartItems - Массив объектов товаров в корзине
+ * @returns {Number} - Общая сумма товаров
+ */
 export function calculateTotalSum(cartItems) {
   return cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
 }
 
+/**
+ * Получение формы слова "товар" в зависимости от числа
+ * @param {number} count - Число, для которого определяется форма слова
+ * @returns {string} - Форма слова "товар"
+ */
 export function getPluralForm(count) {
   const pluralRules = new Intl.PluralRules('ru-RU');
 
