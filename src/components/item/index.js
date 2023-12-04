@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 function Item(props) {
   const cn = bem('Item');
   const handleAddToCart = () => {
-    props.onAddToCart(props.item);
+    props.onAddToCart(props.item.code);
   };
 
   return (

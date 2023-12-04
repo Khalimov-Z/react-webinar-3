@@ -41,8 +41,6 @@ CartModal.propTypes = {
 
 CartModal.defaultProps = {
   cart: [],
-  onCloseCart: () => {},
-  onRemoveFromCart: () => {},
 };
 
 export default React.memo(CartModal);

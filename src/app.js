@@ -15,15 +15,15 @@ function App({store}) {
   const list = store.getState().list;
   const cart = store.getState().cart;
   const isCartModalOpen = store.getState().isCartModalOpen;
-  const cartCount = store.getCartCount()
+  const {uniqueItemsCount, totalSum} =store.getState().headerInfo
 
   const callbacks = {
-    handleAddToCart: useCallback((item) => {
-      store.addToCart(item)
+    handleAddToCart: useCallback((itemId) => {
+      store.addToCart(itemId)
     }, [store]),
 
-    handleRemoveFromCart: useCallback((item) => {
-      store.removeFromCart(item)
+    handleRemoveFromCart: useCallback((itemId) => {
+      store.removeFromCart(itemId)
     },[store]),
 
     handleOpenCart: useCallback(() => {
@@ -39,7 +39,7 @@ function App({store}) {
   return (
     <PageLayout>
       <Head title='Магазин' />
-      <Controls cartCount={cartCount} cart={cart} onOpenCart={callbacks.handleOpenCart} />
+      <Controls uniqueItemsCount={uniqueItemsCount} totalSum={totalSum} onOpenCart={callbacks.handleOpenCart} />
       <List list={list} onAddToCart={callbacks.handleAddToCart} />
       {isCartModalOpen && (
         <CartModal

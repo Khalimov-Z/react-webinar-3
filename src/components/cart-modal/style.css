@@ -16,7 +16,7 @@
   background: #FFF;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.50);
   width: 960px;
-  height: 407px;
+  max-height: 80vh;
   overflow-y: auto;
 }
 

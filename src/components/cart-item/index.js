@@ -7,7 +7,7 @@ function CartItem(props) {
   const cn = bem('CartItem');
 
   const handleRemoveFromCart = () => {
-    props.onRemoveFromCart(props.cartItem)
+    props.onRemoveFromCart(props.cartItem.code)
   }
 
   return (
@@ -42,7 +42,6 @@ CartItem.defaultProps = {
     price: 0,
     quantity: 0,
   },
-  onRemoveFromCart: () => {},
 };
 
 export default React.memo(CartItem);
