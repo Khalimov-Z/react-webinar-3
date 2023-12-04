@@ -68,4 +68,7 @@
   line-height: normal;
 }
 
+body.modal-open {
+  overflow: hidden;
+}
 

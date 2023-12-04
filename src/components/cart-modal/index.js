@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import CartItem from "../cart-item";
 import {calculateTotalSum} from "../../utils";
 import './style.css'
@@ -7,6 +7,13 @@ import PropTypes from "prop-types";
 
 function CartModal({ cart, onCloseCart, onRemoveFromCart }) {
   const cn = bem('CartModal');
+
+  useEffect(() => {
+    document.body.classList.add('modal-open');
+    return () => {
+      document.body.classList.remove('modal-open');
+    };
+  }, []);
 
   return (
     <div className={cn()}>
