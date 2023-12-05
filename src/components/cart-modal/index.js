@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react';
 import CartItem from "../cart-item";
-import {calculateTotalSum} from "../../utils";
+import {formatPrice} from "../../utils";
 import './style.css'
 import {cn as bem} from "@bem-react/classname";
 import PropTypes from "prop-types";
 
-function CartModal({ cart, onCloseCart, onRemoveFromCart }) {
+function CartModal({ cart, totalSum,  onCloseCart, onRemoveFromCart }) {
   const cn = bem('CartModal');
 
   useEffect(() => {
@@ -33,7 +33,7 @@ function CartModal({ cart, onCloseCart, onRemoveFromCart }) {
           <span>
             Итого
           </span>
-          <p>{calculateTotalSum(cart)}</p>
+          <p>{formatPrice(totalSum)}</p>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import './style.css';
-import {getPluralForm} from '../../utils';
+import {formatPrice, getPluralForm} from '../../utils';
 import {cn as bem} from "@bem-react/classname";
 import PropTypes from "prop-types";
 
@@ -12,7 +12,7 @@ function Controls({uniqueItemsCount, totalSum, onOpenCart }) {
     <div className={cn()}>
       <div className={cn('cartStatus')}>В корзине:</div>
       <div className={cn('cartContent')}>
-        {uniqueItemsCount ? `${uniqueItemsCount} ${getPluralForm(uniqueItemsCount)} / ${totalSum}` : 'пусто'}
+        {uniqueItemsCount ? `${uniqueItemsCount} ${getPluralForm(uniqueItemsCount)} / ${formatPrice(totalSum)}` : 'пусто'}
       </div>
       <button className={cn('goToButton')} onClick={onOpenCart}>
         Перейти

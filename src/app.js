@@ -11,10 +11,10 @@ import CartModal from "./components/cart-modal";
  * @returns {React.ReactElement}
  */
 function App({store}) {
+  const [isCartModalOpen, setIsCartModalOpen] = React.useState(false);
 
   const list = store.getState().list;
   const cart = store.getState().cart;
-  const isCartModalOpen = store.getState().isCartModalOpen;
   const {uniqueItemsCount, totalSum} =store.getState().headerInfo
 
   const callbacks = {
@@ -27,12 +27,12 @@ function App({store}) {
     },[store]),
 
     handleOpenCart: useCallback(() => {
-      store.openCartModal();
-    },[store]),
+      setIsCartModalOpen(true);
+    },[setIsCartModalOpen]),
 
     handleCloseCart: useCallback(() => {
-      store.closeCartModal()
-    },[store])
+      setIsCartModalOpen(false);
+    },[setIsCartModalOpen])
 
   }
 
@@ -44,6 +44,7 @@ function App({store}) {
       {isCartModalOpen && (
         <CartModal
           cart={cart}
+          totalSum={totalSum}
           onCloseCart={callbacks.handleCloseCart}
           onRemoveFromCart={callbacks.handleRemoveFromCart}
         />

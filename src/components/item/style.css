@@ -2,6 +2,9 @@
   display: flex;
   justify-content: flex-start;
   transition: background-color 1s;
+  width: 1024px;
+  height: 61px;
+  flex-shrink: 0;
 }
 
 .Item-code {

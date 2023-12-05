@@ -1,4 +1,3 @@
-import {calculateTotalSum} from './utils.js'
 
 /**
  * Хранилище состояния приложения
@@ -14,7 +13,6 @@ class Store {
         uniqueItemsCount: 0,
         totalSum: 0,
       },
-      isCartModalOpen: false,
     });
     this.listeners = []; // Слушатели изменений состояния
   }
@@ -54,7 +52,10 @@ class Store {
 
   updateHeaderInfo() {
     const uniqueItemsCount = this.state.cart.reduce((count, item) => count + 1, 0);
-    const totalSum = calculateTotalSum(this.state.cart);
+    const totalSum = this.state.cart.reduce((sum, item) => {
+      const itemTotal = item.price * item.quantity;
+      return sum + itemTotal;
+    }, 0);
 
     this.setState({
       ...this.state,
@@ -103,24 +104,6 @@ class Store {
     this.setState({ ...this.state, cart: updatedCart });
     this.updateHeaderInfo();
   }
-
-  /**
-   * Открытие модального окна корзины
-   */
-  openCartModal() {
-    this.setState({ ...this.state, isCartModalOpen: true });
-  }
-
-  /**
-   * Закрытие модального окна корзины
-   */
-  closeCartModal() {
-    this.setState({ ...this.state, isCartModalOpen: false });
-  }
-
 }
-
-
-
 
 export default Store;

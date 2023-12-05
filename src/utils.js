@@ -65,19 +65,6 @@ export function formatPrice(price) {
   return formatter.format(price);
 }
 
-/**
- * Рассчитывает общую сумму товаров в корзине
- * @param {Array} cartItems - Массив объектов товаров в корзине
- * @returns {string} - Общая сумма товаров
- */
-export function calculateTotalSum(cartItems) {
-  const totalSum = cartItems.reduce((sum, item) => {
-    const itemTotal = item.price * item.quantity;
-    return sum + itemTotal;
-  }, 0);
-
-  return formatPrice(totalSum);
-}
 
 /**
  * Получение формы слова "товар" в зависимости от числа
