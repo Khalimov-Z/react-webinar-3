@@ -17,4 +17,10 @@
 
 .BasketTool-link {
   justify-self: flex-start;
+  color: #0087E9;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
 }

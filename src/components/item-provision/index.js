@@ -3,6 +3,13 @@ import {numberFormat} from "../../utils";
 import "./style.css";
 import {memo} from "react";
 
+const itemsTitle = {
+    country: 'Страна производитель: ',
+    category: 'Категория: ',
+    edition: 'Год выпуска: ',
+    price: 'Цена: ',
+}
+
 function ItemProvision(props) {
 
   const callbacks = {
@@ -16,11 +23,11 @@ function ItemProvision(props) {
   return (
     <div className="ItemProvision">
       <p>{props.item.description}</p>
-      <p><strong>{props.item.madeIn.title} ({props.item.madeIn.code})</strong></p>
-      <p><strong>{props.item.category.title}</strong></p>
-      <p><strong>{props.item.edition}</strong></p>
-      <h2>{numberFormat(props.item.price)} ₽</h2>
-      <button onClick={callbacks.onAdd}></button>
+      <p>{itemsTitle.country}<strong>{props.item.madeIn.title} ({props.item.madeIn.code})</strong></p>
+      <p>{itemsTitle.category}<strong>{props.item.category.title}</strong></p>
+      <p>{itemsTitle.edition}<strong>{props.item.edition}</strong></p>
+      <h2>{itemsTitle.price}{numberFormat(props.item.price)} ₽</h2>
+      <button onClick={callbacks.onAdd}>Добавить</button>
     </div>);
 }
 
@@ -40,6 +47,7 @@ ItemProvision.propTypes = {
     }),
   }),
   onAdd: PropTypes.func,
+  lang: PropTypes.string,
 };
 
 ItemProvision.defaultProps = {
