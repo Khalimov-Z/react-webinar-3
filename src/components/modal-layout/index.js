@@ -7,6 +7,14 @@ function ModalLayout(props) {
 
   const cn = bem('ModalLayout');
 
+  const callbacks = {
+    closeModalHandler: (e) => {
+      if (e.target.closest('a')) {
+        props.onClose();
+      }
+    }
+  }
+
   // Корректировка центра, если модалка больше окна браузера.
   const layout = useRef();
   const frame = useRef();
@@ -34,7 +42,7 @@ function ModalLayout(props) {
           <h1 className={cn('title')}>{props.title}</h1>
           <button className={cn('close')} onClick={props.onClose}>Закрыть</button>
         </div>
-        <div className={cn('content')}>
+        <div className={cn('content')} onClick={callbacks.closeModalHandler}>
           {props.children}
         </div>
       </div>

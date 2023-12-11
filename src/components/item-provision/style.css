@@ -1,0 +1,8 @@
+.ItemProvision {
+  padding-block: 5px;
+  padding-inline: 40px;
+}
+
+.ItemProvision p {
+  font-size: 18px;
+}
