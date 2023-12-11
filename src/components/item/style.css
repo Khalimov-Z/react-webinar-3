@@ -33,12 +33,13 @@
   font-size: 18px;
 }
 
-.Item-link {
+.Item-title span {
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
 }
 
-.Item-link:hover, .Item-link:active {
+.Item-title span:hover, .Item-title span:active {
   text-decoration: underline;
   color: inherit;
 }

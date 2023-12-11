@@ -3,23 +3,21 @@ import PropTypes from "prop-types";
 import {cn as bem} from '@bem-react/classname';
 import {numberFormat} from "../../utils";
 import './style.css';
-import {NavLink} from "react-router-dom";
 
 function Item(props) {
 
   const cn = bem('Item');
 
   const callbacks = {
-    onAdd: (e) => props.onAdd(props.item._id)
+    onAdd: (e) => props.onAdd(props.item._id),
+    onOpenItem: (e) => props.onOpen(props.item._id)
   }
 
 
   return (
     <div className={cn()}>
-      <div className={cn('title')}>
-        <NavLink className={cn('link')} to={`./provision/${props.item._id}`}>
-          {props.item.title}
-        </NavLink>
+      <div className={cn('title')} onClick={callbacks.onOpenItem}>
+         <span>{props.item.title}</span>
       </div>
       <div className={cn('actions')}>
         <div className={cn('price')}>{numberFormat(props.item.price)} ₽</div>
@@ -36,10 +34,12 @@ Item.propTypes = {
     price: PropTypes.number
   }).isRequired,
   onAdd: PropTypes.func,
+  onOpenItem: PropTypes.func,
 };
 
 Item.defaultProps = {
   onAdd: () => {},
+  onOpenItem: () => {}
 }
 
 export default memo(Item);

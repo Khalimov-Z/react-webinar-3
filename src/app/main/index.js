@@ -7,10 +7,12 @@ import List from "../../components/list";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import Pagination from "../../components/pagination";
+import {useNavigate} from "react-router-dom";
 
 function Main() {
 
   const store = useStore();
+  const navigate = useNavigate();
 
   const select = useSelector(state => ({
     list: state.catalog.list,
@@ -35,12 +37,20 @@ function Main() {
     changePage: useCallback((page) => {
       store.actions.catalog.updateSkip((page - 1) * select.perPage);
     }, [store]),
+
+    onOpenItemPage: useCallback((_id) => navigate(`/provision/${_id}`),
+      [store]
+    ),
   }
 
   const renders = {
     item: useCallback((item) => {
-      return <Item item={item} onAdd={callbacks.addToBasket}/>
-    }, [callbacks.addToBasket]),
+      return <Item
+        item={item}
+        onAdd={callbacks.addToBasket}
+        onOpen={callbacks.onOpenItemPage}
+      />
+    }, [callbacks.addToBasket, callbacks.onOpenItemPage]),
   };
 
   return (

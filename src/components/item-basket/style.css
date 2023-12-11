@@ -29,12 +29,13 @@
   white-space: nowrap;
 }
 
-.ItemBasket-link {
+.ItemBasket-title span {
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
 }
 
-.ItemBasket-link:hover, .ItemBasket-link:active {
+.ItemBasket-title span:hover, .ItemBasket-title span:active {
   text-decoration: underline;
   color: inherit;
 }
