@@ -1,0 +1,13 @@
+.positioner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left {
+  margin-right: auto; /* Помещает элемент в левый край */
+}
+
+.right {
+  margin-left: auto; /* Помещает элемент в правый край */
+}

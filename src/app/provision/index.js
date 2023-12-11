@@ -6,6 +6,8 @@ import {useCallback, useEffect, useState} from "react";
 import useSelector from "../../store/use-selector";
 import {useParams} from "react-router-dom";
 import ItemProvision from "../../components/item-provision";
+import Positioner from "../../components/positioner";
+import MainMenu from "../../components/main-menu";
 
 
 function Provision() {
@@ -43,9 +45,14 @@ function Provision() {
   return (
     <PageLayout>
       <Head title={select.provision.title} />
-      <BasketTool onOpen={callbacks.openModalBasket}
-                  amount={select.amount}
-                  sum={select.sum} />
+      <Positioner
+        left={<MainMenu />}
+        right={
+        <BasketTool
+          onOpen={callbacks.openModalBasket}
+          amount={select.amount}
+          sum={select.sum} />}
+      />
       {!loading && <ItemProvision item={select.provision}
                                onAdd={callbacks.addToBasket} />}
     </PageLayout>
